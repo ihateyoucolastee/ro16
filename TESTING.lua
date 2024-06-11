@@ -138,7 +138,7 @@ local Converted = {
 -- Properties:
 
 Converted["_16UI"].Name = "16UI"
-Converted["_16UI"].Parent = game.Players.LocalPlayer.PlayerGui
+Converted["_16UI"].Parent = game:GetService("CoreGui")
 
 Converted["_ControlFrame"].BackgroundTransparency = 1
 Converted["_ControlFrame"].Size = UDim2.new(1, 0, 1, 0)
@@ -47224,10 +47224,10 @@ local function ILIW_fake_script() -- Fake Script: StarterGui.16UI.CoreScripts/To
 	mouseh.ZIndex = 9999999
 	mouseh.Active = false
 	mouseh.Image = 'rbxasset://textures/ArrowFarCursor.png'
-	game.RunService.RenderStepped:Connect(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
 		shiftreplica = uis.MouseBehavior == Enum.MouseBehavior.LockCenter
 	end)
-	game.RunService.RenderStepped:Connect(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
 		if uis:GetFocusedTextBox() == true then
 			typing = true
 		else
@@ -47236,7 +47236,7 @@ local function ILIW_fake_script() -- Fake Script: StarterGui.16UI.CoreScripts/To
 	end)
 	local othericon = false
 	local clickdecicon = false
-	game.RunService.RenderStepped:Connect(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
 		if shiftreplica == false and afterlock == false then
 			afterlock = true
 			if afterlock then
