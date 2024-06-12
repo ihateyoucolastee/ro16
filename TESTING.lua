@@ -1,7 +1,3 @@
--- NOTE: THIS FILE IS TOO BIG TO FIT IN ONE SCRIPT SO IT IS SPLIT UP IN THIS FOLDER, COPY EACH SCRIPT AFTER ANOTHER TO FORM THE FULL SCRIPT (EX: Split_1, then Split_2, then Split_3, etc.)-- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
-
--- Instances:
-
 local Converted = {
 	["_16UI"] = Instance.new("ScreenGui");
 	["_ControlFrame"] = Instance.new("Frame");
@@ -711,10 +707,7 @@ do -- Fake Module: StarterGui.16UI.Modules.VR.VirtualKeyboard
 			end
 
 			local function isEnabled()
-				if newKey:GetCurrentKeyValue() == "<Speaker>" then
-					return IsVoiceToTextEnabled()
-				end
-				return true
+				return false
 			end
 
 			local function onClicked()
@@ -42355,7 +42348,7 @@ local function RMVVQIN_fake_script() -- Fake Script: StarterGui.16UI.CoreScripts
 	waitForChild( game:GetService("CoreGui"), "16UI")
 
 	game:GetService("CoreGui")["16UI"]:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-	local isTenFootInterface = require( game:GetService("CoreGui")["16UI"].Modules.TenFootInterface):IsEnabled()
+	local isTenFootInterface = false
 	local utility = require( game:GetService("CoreGui")["16UI"].Modules.Settings.Utility)
 	local isSmallTouchScreen = utility:IsSmallTouchScreen()
 
@@ -49415,4 +49408,4 @@ coroutine.wrap(OPJAE_fake_script)()
 coroutine.wrap(DRMF_fake_script)()
 coroutine.wrap(RXQXNSZ_fake_script)()
 coroutine.wrap(ILIW_fake_script)()
-coroutine.wrap(CBKFZDW_fake_script)()-- Please leave these comments in and leave credit, it took me a while to make this
+coroutine.wrap(CBKFZDW_fake_script)()
