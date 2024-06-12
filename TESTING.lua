@@ -1,3 +1,6 @@
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("16UI") then
+	print("RESTART YOUR GAME THEN EXECUTE AS THIS ALREADY HAS BEEN EXECUTED")
+end
 local Converted = {
 	["_16UI"] = Instance.new("ScreenGui");
 	["_ControlFrame"] = Instance.new("Frame");
@@ -28089,7 +28092,6 @@ do -- Fake Module: StarterGui.16UI.Modules.PlayerlistModule
 		local isTenFootInterface = TenFootInterface:IsEnabled()
 
 		local playerDropDownModule = require(RobloxGui.Modules.PlayerDropDown)
-		local blockingUtility = playerDropDownModule:CreateBlockingUtility()
 		local playerDropDown = playerDropDownModule:CreatePlayerDropDown()
 
 		local PlayerPermissionsModule = require(RobloxGui.Modules.PlayerPermissionsModule)
@@ -28292,9 +28294,6 @@ do -- Fake Module: StarterGui.16UI.Modules.PlayerlistModule
 				-- return nothing, we need to spawn off setAvatarIconAsync() as a later time to not block
 				return ""
 			else
-				if blockingUtility:IsPlayerBlockedByUserId(player.userId) then
-					return BLOCKED_ICON
-				else
 					local userIdStr = tostring(player.userId)
 					local membershipType = player.MembershipType
 					if CUSTOM_ICONS[userIdStr] then
@@ -28312,7 +28311,6 @@ do -- Fake Module: StarterGui.16UI.Modules.PlayerlistModule
 					else
 						return ""
 					end
-				end
 			end
 
 			return ""
@@ -29766,8 +29764,6 @@ do -- Fake Module: StarterGui.16UI.Modules.PlayerlistModule
 			end
 		end
 
-		blockingUtility:GetBlockedStatusChangedEvent():connect(blockStatusChanged)
-
 		return Playerlist
 
 	end
@@ -30416,12 +30412,6 @@ do -- Fake Module: StarterGui.16UI.Modules.Chat
 		local blockingUtility = nil
 
 		local topbarEnabled = true
-
-		if not NON_CORESCRIPT_MODE and not InputService.VREnabled then
-			playerDropDownModule = require(RobloxGui.Modules:WaitForChild("PlayerDropDown"))
-			playerDropDown = playerDropDownModule:CreatePlayerDropDown()
-			blockingUtility = playerDropDownModule:CreateBlockingUtility()
-		end
 
 		--[[ END OF SCRIPT VARIABLES ]]
 
@@ -32662,11 +32652,7 @@ do -- Fake Module: StarterGui.16UI.Modules.Chat
 			end
 
 			function this:IsPlayerBlocked(player)
-				if blockingUtility then
-					return player and blockingUtility:IsPlayerBlockedByUserId(player.userId)
-				else
 					return false
-				end
 			end
 
 			function this:BlockPlayerAsync(playerToBlock)
@@ -32675,10 +32661,7 @@ do -- Fake Module: StarterGui.16UI.Modules.Chat
 					local playerToBlockName = playerToBlock.Name
 					if blockUserId > 0 then
 						if not this:IsPlayerBlocked(playerToBlock) then
-							if blockingUtility then
-								blockingUtility:BlockPlayerAsync(playerToBlock)
-								this.ChatWindowWidget:AddSystemChatMessage(playerToBlockName .. " is now blocked.")
-							end
+
 						else
 							this.ChatWindowWidget:AddSystemChatMessage(playerToBlockName .. " is already blocked.")
 						end
@@ -32696,10 +32679,7 @@ do -- Fake Module: StarterGui.16UI.Modules.Chat
 					local playerToUnblockName = playerToUnblock.Name
 
 					if this:IsPlayerBlocked(playerToUnblock) then
-						if blockingUtility then
-							this.ChatWindowWidget:AddSystemChatMessage(playerToUnblockName .. " is no longer blocked.")
-							blockingUtility:UnblockPlayerAsync(playerToUnblock)
-						end
+
 					else
 						this.ChatWindowWidget:AddSystemChatMessage(playerToUnblockName .. " is not blocked.")
 					end
@@ -32707,21 +32687,14 @@ do -- Fake Module: StarterGui.16UI.Modules.Chat
 			end
 
 			function this:IsPlayerMuted(player)
-				if blockingUtility then
-					return player and blockingUtility:IsPlayerMutedByUserId(player.userId)
-				else
-					return false
-				end
+				return false
 			end
 
 			function this:MutePlayer(playerToMute)
 				if playerToMute and playerToMute ~= Player then
 					if playerToMute.UserId > 0 then
 						if not this:IsPlayerMuted(playerToMute) then
-							if blockingUtility then
-								blockingUtility:MutePlayer(playerToMute)
-								this.ChatWindowWidget:AddSystemChatMessage(playerToMute.Name .. " is now muted.")
-							end
+
 						else
 							this.ChatWindowWidget:AddSystemChatMessage(playerToMute.Name .. " is already muted.")
 						end
@@ -32735,13 +32708,8 @@ do -- Fake Module: StarterGui.16UI.Modules.Chat
 
 			function this:UnmutePlayer(playerToUnmute)
 				if playerToUnmute then
-					if this:IsPlayerMuted(playerToUnmute) then
-						if blockingUtility then
-							blockingUtility:UnmutePlayer(playerToUnmute)
-							this.ChatWindowWidget:AddSystemChatMessage(playerToUnmute.Name .. " is no longer muted.")
-						end
-					else
-						this.ChatWindowWidget:AddSystemChatMessage(playerToUnmute.Name .. " is not muted.")
+					if not this:IsPlayerMuted(playerToUnmute) then
+					    this.ChatWindowWidget:AddSystemChatMessage(playerToUnmute.Name .. " is not muted.")
 					end
 				end
 			end
@@ -40892,7 +40860,6 @@ local function DLOJ_fake_script() -- Fake Script: StarterGui.16UI.CoreScripts/Bu
 	while PlayersService.LocalPlayer == nil do PlayersService.ChildAdded:wait() end
 	local GuiRoot = CoreGuiService:WaitForChild('16UI')
 	local playerDropDownModule = require(GuiRoot.Modules:WaitForChild("PlayerDropDown"))
-	local blockingUtility = playerDropDownModule:CreateBlockingUtility()
 
 
 	--[[ SCRIPT VARIABLES ]]
@@ -41455,7 +41422,6 @@ local function DLOJ_fake_script() -- Fake Script: StarterGui.16UI.CoreScripts/Bu
 			local fromOthers = localPlayer ~= nil and sourcePlayer ~= localPlayer
 
 			-- annihilate chats made by blocked or muted players
-			if blockingUtility:IsPlayerBlockedByUserId(sourcePlayer.userId) or blockingUtility:IsPlayerMutedByUserId(sourcePlayer.userId) then return end
 
 			-- remove messages that are filtered from the default gui text filter
 			if not isLabelTextAllowed(message) then return end
