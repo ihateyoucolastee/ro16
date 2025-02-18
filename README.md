@@ -11,5 +11,7 @@ You can find the script [here](https://github.com/repoTestn/Roblox16Feel/release
 Games with the LegacyChatSystem is prone to duplicating messages
 
 The shift-lock cursor doesnt display
+
+Playerlist doesn't show the friend icons upon first exeecution
 ## What can this script run on?
 idk 😭😭
