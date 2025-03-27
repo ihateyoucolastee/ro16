@@ -1,4 +1,4 @@
-## Introducing ro16, the best 2016 roblox experience you'll get
+## Introducing ro16, the best 2016 roblox experience you'll get!
 ![image](https://github.com/user-attachments/assets/5bee5c2d-02d4-441d-8e39-549f741eb864)
 ![image](https://github.com/user-attachments/assets/96baf48a-2289-40fb-8c94-f8baee43723b)
 ![image](https://github.com/user-attachments/assets/84a88790-dedf-4ed9-80d5-0a97dc2fa65d)
@@ -14,4 +14,9 @@ The shift-lock cursor doesnt display
 
 Playerlist doesn't show the friend icons upon first exeecution
 ## What can this script run on?
-idk 😭😭
+Any executors with the following functions will **PROBABLY** work
+- GetHUI
+- CloneRef
+- HttpGet/Loadstring
+- WriteFile
+- LoadFile
