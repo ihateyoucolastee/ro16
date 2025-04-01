@@ -12,7 +12,7 @@ Games with the LegacyChatSystem is prone to duplicating messages
 
 The shift-lock cursor doesnt display
 
-Playerlist doesn't show the friend icons upon first exeecution
+Playerlist doesn't show the friend icons upon first execution
 ## What can this script run on?
 Any executors with the following functions will **PROBABLY** work
 - GetHUI
